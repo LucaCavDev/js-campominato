@@ -1,6 +1,8 @@
 // Descrizione
+//1========================================
 // Il computer deve generare 16 numeri casuali tra 1 e 100.
 // I numeri non possono essere duplicati
+//2==============================
 // In seguito deve chiedere all’utente (100 - 16) volte di inserire un numero alla volta, sempre compreso tra 1 e 100.
 // L’utente non può inserire più volte lo stesso numero.
 // Se il numero è presente nella lista dei numeri generati, la partita termina, altrimenti si continua chiedendo all’utente un altro numero.
@@ -9,74 +11,81 @@
 
 
 //1-=============================================
-//1-Devo fare un array composto da 16 numeri casuali tra 1 e 100
+//1-Devo fare un array composto da 16 numeri casuali non ripetuti tra 1 e 100
 //----------------------------------------
 var arrayBombe = []; //qua ci vanno infilati 16 numeri casuali
+var numeroRandom;  // queste sono le singole bombe
 
-var numeroRandom;  // questa rappresenta il singolo numero casuale da infilare nell' arrayBombe
-
-//faccio un loop nel quale per 16 volte creo un numero casuale fra 1 e 100 che ricavo grazie alla funzione a fondo pagina e ad ogni giro lo pusho in questo array. alla fine del 16esimo giro con il console.log lo stampo in console
-for (var i = 0; i < 16; i++) {
-  numeroRandom = getRandom(100); //ogni giro creo un numero casuale con la funzione e lo identifico con la variabile numero random
-  arrayBombe.push(numeroRandom); //ogni giro pusho nell'array il numeroRandom
+//faccio un loop che termina quando l'array diventa lungo 16
+while (arrayBombe.length < 16) {
+  //all'interno del loop genero un numero random tra 1 e 100 (vedi funzione a pie pagina)
+  numeroRandom = getRandom(100);
+  //pusho i numeri generati nell'array SE non sono gia presenti nell'array
+  if (arrayBombe.indexOf(numeroRandom) === -1) {
+    arrayBombe.push(numeroRandom);
+  }
 }
-//finiti i 16 giri, stampo l'array che ne è uscito fuori
-console.log('La lista di numeri esplosivi è:', arrayBombe);
 
-//manca la verifica che questi numeri non si ripetano!!!!!!!!!
+//riordino le bombe per facilità di lettura
+arrayBombe.sort(compareNumbers);
 
+//una volta inseriti 16 elementi nell'array il loop si ferma e lo stampo
+console.log('arrayBombe è composto dai seguenti numeri, unici tra loro:', arrayBombe);
 //=========================================================
 
-
-
-
 //2-===========================================
-// le var che mi servono in questa seconda parte dell'esercizio le scrivo all'inizio, anche se le identifico in seguito mentre costruisco il loop, perchè se generali devono venire dichiarate prima del loop
 
+//var geneneriche
 var tentativo; //il singolo numero infilato nel parseintprompt dall'utente
-var arrayTentativi = []; // composto da tutti i tentativi fatti dall'utente prima che finisca il loop (prima che esploda una bomba)
+var arrayTentativi = []; // array dei tentativi dall'utente prima che finisca il loop (prima che esploda una bomba)
 
-var punti = 0; //nella richiesta c'è da dichiarare quante volte l'utente ha inserito un numero che non è esploso. la sommatoria di queste volte è il punteggio finale. può essere al max 84 dato che ci sono 16 bombe ma il caso limite lo vedo in seguito. parto da 0 e non da '' perchè se sbaglio al primo tentativo non avrei un risultato valido a stampare
-
-//devo chiedere all'utente una serie (loop (100-16=84)) di prompt chiedendo numeri tra 1 e 100
-
-//costrusico un array con questi numeri che l'utente inserisce
-
-//quando numero inserito == uno dei valori nell'array,
-//printo la somma dei del numero di inserimenti
-
-for (var i = 0; i < 84; i++) {
-  //con parseint e prompt chiedo al giocatore un numero fra 1 e 100
+// devo fare una richiesta all'utente tot volte ( 1 < tot < 84)
+for (var i = 0; arrayTentativi.length < 84; i++) {
+  // chiedo a utente ( per max 84 volte) di inserire un numero tra 1 e 100
   tentativo = parseInt(prompt('Inserisci un numero da 1 a 100'));
+  console.log('proviamo il numero: ', tentativo);
+  // var punti = 0;
 
-  //  https://developer.mozilla.org/it/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
-  //struttura utilizzo indexOf
-  //arr[nome dell'array nel quale stiamo "cercando"].indexOf[metodo che usiamo per sapere il numero un elemento dell'arrey, se mi da -1, vuol dire che non è presente](elem[elem indica l'elemento che sto cercando nell'array])
-  if (arrayBombe.indexOf(tentativo) !== -1) {
-    console.log('Sei esploso!');
-    i = 84;
+  //se i numero inserito non è compreso fra 1 e 100 non lo accettiamo, ma facciamo riprovare
+  if  ((tentativo < 1) || (tentativo > 100)) {
+    alert('Attenzione inserire un numero compreso tra 1 e 100');
+    console.log('hai inserito un numero non valido, il:', tentativo,'che è inferiore a 1 o superiore a 100. Ti permettiamo di continuare a giocare ma fai attenzione!');
+
+  //Se il numero è presente nella lista dei numeri generati, la partita termina, altrimenti si continua
+  } else if (arrayTentativi.includes(tentativo)) {
+    alert('Hai inserito due volte lo stesso numero, quindi hai perso!');
+    //col break interrompo il ciclo prima delle 84 volte
+    break;
+
+  } else if (arrayBombe.includes(tentativo)) {
+    console.log('Hai digitato il numero', tentativo, 'bomba, quindi hai perso!');
+    //col break interrompo il ciclo prima delle 84 volte
+    break;
 
   } else {
-    punti++;
-    console.log('Sei sopravvissuto!');
+    arrayTentativi.push(tentativo);
   }
-
-  arrayTentativi.push(tentativo);
-
+  //creo la variabile punti, che equivale alla somma dei tentativi validi(uso la lungezza dell'array dei tentativi validi)
+  var punti = arrayTentativi.length;
 }
+//dichiaro quali numeri validi l'utente ha inserito durante la partita
+console.log('In questa partita hai digitato questi numeri validi: ', arrayTentativi);
 
-console.log('Hai provato questi numeri e ti è andata bene: ', arrayTentativi);
-
-//================== stampo il punteggio finale, composto dalla sommatoria delle volte che non sono morto
-console.log('Sei sopravvissuto ', punti,' volte!');
+// Al termine della partita il software deve comunicare il punteggio, cioè il numero di volte che l’utente ha inserito un numero consentito.
+console.log('Sei sopravvissuto ', punti,' volte prima di perdere');
 
 
 
 
 
 //funzioni generiche:
-//mi serve funzione per generare 16 numeri casuali fra 1 e 100
 
+//mi serve funzione per generare 16 numeri casuali fra 1 e 100
 function getRandom(max) {
   return Math.floor(Math.random() * max) + 1;
+}
+
+//mi serve per riordinare
+function compareNumbers(a, b) {
+  return a - b;
 }
