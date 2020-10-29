@@ -11,8 +11,6 @@
 
 
 //1-=============================================
-//1-Devo fare un array composto da 16 numeri casuali non ripetuti tra 1 e 100
-//----------------------------------------
 var arrayBombe = []; //qua ci vanno infilati 16 numeri casuali
 var numeroRandom;  // queste sono le singole bombe
 
