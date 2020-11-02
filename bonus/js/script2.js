@@ -1,4 +1,4 @@
-// BONUS: (da fare solo se funziona tutto il resto)
+maxnumeri// BONUS: (da fare solo se funziona tutto il resto)
 // all’inizio il software richiede anche una difficoltà all’utente che cambia il range di numeri casuali:
 // con difficoltà 0 => tra 1 e 100
 // con difficoltà 1 =>  tra 1 e 80
@@ -15,6 +15,46 @@
 // Già fatto nelle condizioni dell'esercizio normale.
 
 
+// chiedo all'utente la difficoltà ( la lunghezza dell'arrayBombe)
+
+
+var difficoltà = parseInt(prompt('Per Facile digita 0 - Per Medio digita 1 - Per difficile digita 2'));
+//capire se var difficoltà/switch dif
+// use switch case
+var maxnumeri = '';
+switch (difficoltà){
+  case 0:
+    maxnumeri = 100;
+    maxtentativi = 84;
+    break;
+
+  case 1:
+    maxnumeri = 80;
+    maxtentativi = 64;
+    break;
+
+  case 2:
+    maxnumeri = 50;
+    maxtentativi = 34;
+    break;
+
+  default:
+    alert('Inserisci 0 - 1 - 2 ! (aggiorna la pagina grazie ;)');
+    console.log('Inserisci 0 - 1 - 2 ! (aggiorna la pagina grazie ;)');
+
+
+  //ma non è che boh con default si toglie max numeri e si fa dire un alert del genere infila solo 1 2 e 3 o il prompt dei numeri
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -24,7 +64,7 @@ var arrayBombe = [];
 var numeroRandom;
 
 while (arrayBombe.length < 16) {
-  numeroRandom = getRandom(100);
+  numeroRandom = getRandom(maxnumeri);
   if (arrayBombe.indexOf(numeroRandom) === -1) {
     arrayBombe.push(numeroRandom);
   }
@@ -39,10 +79,10 @@ console.log('arrayBombe è composto dai seguenti numeri, unici tra loro:', array
 
 var arrayTentativi = [];
 var appoggio = false;
-
+var lunghezzaArray = arrayTentativi.length;
 //condizione iniziale è che i tentativi validi siano < 84 volte e che var di appoggio sia falsa
-while (arrayTentativi.length < 84 && appoggio == false) {
-  var tentativo = parseInt(prompt('Inserisci un numero da 1 a 100'));
+while (arrayTentativi.length < maxtentativi && appoggio == false) {
+  var tentativo = parseInt(prompt('Inserisci un numero da 1 a 100'));// ', maxnumeri.toString(),' se uso questo al posto di 100, il valore non va nel messaggio ma nel buco dell'input come fosse selezionato di default
   console.log('Inserito il numero: ', tentativo);
 
   //condizioni:
@@ -53,10 +93,9 @@ while (arrayTentativi.length < 84 && appoggio == false) {
     appoggio = true;
 
   // se utente mette un numero non compreso tra 1 e 100 gli si chiede di metterne un altro
-  } else if ((tentativo < 1) || (tentativo > 100)) {
-    alert('hai inserito un numero non valido. Riprova con un altro tra 1 e 100');
-    console.log('hai inserito un numero non valido, il:', tentativo,'che è inferiore a 1 o superiore a 100. Ti permettiamo di continuare a giocare ma fai attenzione!');
-
+  } else if ((tentativo < 1) || (tentativo > maxnumeri)) {
+    alert('hai inserito un numero non valido. Riprova con un altro tra 1 e 100'); //', maxnumeri.toString(),' se uso questo al posto di 100, il valore non va nel messaggio ma nel buco dell'input come fosse selezionato di default
+    console.log('hai inserito un numero non valido, il:', tentativo,'che è inferiore a 1 o superiore a ', maxnumeri.toString(),'. Ti permettiamo di continuare a giocare ma fai attenzione!'); //', maxnumeri.toString(),'nel console log mi funziona 
   // se utente usa caratteri non numerici gli chiedo di riprovare
   } else if (isNaN(tentativo)) {
     alert('Usa solo numeri!')
