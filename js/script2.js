@@ -14,7 +14,7 @@ console.log('arrayBombe è composto dai seguenti numeri, unici tra loro:', array
 //=========================================================
 
 //2-===========================================
-
+var tentativo;
 var arrayTentativi = [];
 var appoggio = false;
 
@@ -50,8 +50,7 @@ while (arrayTentativi.length < 84 && appoggio == false) {
     } else {
       //il numero inserito è valido e non è un numero bomba, quindi lo accetto e aggiungo all'array dei tentativi validi
       arrayTentativi.push(tentativo);
-      console.log(tentativo, ' accettato ed aggiunto alla lista dei tentativi validi');
-      console.log(arrayTentativi);
+      console.log(tentativo, ' accettato ed aggiunto alla lista dei tentativi validi, ',arrayTentativi);
 
       var punti = arrayTentativi.length;
 
@@ -59,9 +58,6 @@ while (arrayTentativi.length < 84 && appoggio == false) {
   }
 }
 console.log('Sei sopravvissuto ', punti,' volte prima di perdere');
-console.log(arrayTentativi);
-
-
 
 
 
