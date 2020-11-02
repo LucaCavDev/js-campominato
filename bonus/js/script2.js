@@ -43,7 +43,7 @@ switch (difficoltà){
     console.log('Inserisci 0 - 1 - 2 ! (aggiorna la pagina grazie ;)');
 
 
-  //ma non è che boh con default si toglie max numeri e si fa dire un alert del genere infila solo 1 2 e 3 o il prompt dei numeri
+  //con default dovrei fare in modo che il gioco si aggiorni, se no si sistema aggiornando la pagina ma non mi sembra pulito per niente
 }
 
 
@@ -95,7 +95,7 @@ while (arrayTentativi.length < maxtentativi && appoggio == false) {
   // se utente mette un numero non compreso tra 1 e 100 gli si chiede di metterne un altro
   } else if ((tentativo < 1) || (tentativo > maxnumeri)) {
     alert('hai inserito un numero non valido. Riprova con un altro tra 1 e 100'); //', maxnumeri.toString(),' se uso questo al posto di 100, il valore non va nel messaggio ma nel buco dell'input come fosse selezionato di default
-    console.log('hai inserito un numero non valido, il:', tentativo,'che è inferiore a 1 o superiore a ', maxnumeri.toString(),'. Ti permettiamo di continuare a giocare ma fai attenzione!'); //', maxnumeri.toString(),'nel console log mi funziona 
+    console.log('hai inserito un numero non valido, il:', tentativo,'che è inferiore a 1 o superiore a ', maxnumeri.toString(),'. Ti permettiamo di continuare a giocare ma fai attenzione!'); //', maxnumeri.toString(),'nel console log mi funziona
   // se utente usa caratteri non numerici gli chiedo di riprovare
   } else if (isNaN(tentativo)) {
     alert('Usa solo numeri!')
