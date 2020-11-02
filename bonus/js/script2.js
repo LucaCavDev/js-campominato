@@ -18,10 +18,10 @@ maxnumeri// BONUS: (da fare solo se funziona tutto il resto)
 // chiedo all'utente la difficoltà ( la lunghezza dell'arrayBombe)
 
 
-var difficoltà = parseInt(prompt('Per Facile digita 0 - Per Medio digita 1 - Per difficile digita 2'));
+var difficoltà = parseInt(prompt('Per difficoltà Facile digita 0 - Per difficoltà Media digita 1 - Per difficoltà Difficile digita 2'));
 //capire se var difficoltà/switch dif
 // use switch case
-var maxnumeri = '';
+var maxnumeri;
 switch (difficoltà){
   case 0:
     maxnumeri = 100;
@@ -82,7 +82,7 @@ var appoggio = false;
 var lunghezzaArray = arrayTentativi.length;
 //condizione iniziale è che i tentativi validi siano < 84 volte e che var di appoggio sia falsa
 while (arrayTentativi.length < maxtentativi && appoggio == false) {
-  var tentativo = parseInt(prompt('Inserisci un numero da 1 a 100'));// ', maxnumeri.toString(),' se uso questo al posto di 100, il valore non va nel messaggio ma nel buco dell'input come fosse selezionato di default
+  var tentativo = parseInt(prompt('Inserisci un numero da 1 a ' + maxnumeri));
   console.log('Inserito il numero: ', tentativo);
 
   //condizioni:
@@ -94,8 +94,8 @@ while (arrayTentativi.length < maxtentativi && appoggio == false) {
 
   // se utente mette un numero non compreso tra 1 e 100 gli si chiede di metterne un altro
   } else if ((tentativo < 1) || (tentativo > maxnumeri)) {
-    alert('hai inserito un numero non valido. Riprova con un altro tra 1 e 100'); //', maxnumeri.toString(),' se uso questo al posto di 100, il valore non va nel messaggio ma nel buco dell'input come fosse selezionato di default
-    console.log('hai inserito un numero non valido, il:', tentativo,'che è inferiore a 1 o superiore a ', maxnumeri.toString(),'. Ti permettiamo di continuare a giocare ma fai attenzione!'); //', maxnumeri.toString(),'nel console log mi funziona
+    alert('hai inserito un numero non valido. Riprova con un altro tra 1 e ' + maxnumeri);
+    console.log('hai inserito un numero non valido, il:', tentativo,'che è inferiore a 1 o superiore a', maxnumeri.toString(),'. Ti permettiamo di continuare a giocare ma fai attenzione!'); //', maxnumeri.toString(),'nel console log mi funziona
   // se utente usa caratteri non numerici gli chiedo di riprovare
   } else if (isNaN(tentativo)) {
     alert('Usa solo numeri!')
